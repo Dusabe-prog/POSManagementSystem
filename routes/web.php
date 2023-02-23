@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -33,3 +34,9 @@ Route::resource('/suppliers', 'App\Http\Controllers\SupplierController');
 Route::resource('/users',  'App\Http\Controllers\UserController');
 Route::resource('/companies', 'App\Http\Controllers\CompanyController');
 Route::resource('/transactions', 'App\Http\Controllers\TransactionController');
+Route::get('/barcode', 'App\Http\Controllers\ProductController@GetProductBarcodes')->name('products.barcode');
+// Route::get('barcodes', function(){
+//     return  $products = Product::select('barcode')->get();
+//     return view('products.barcode.index');
+
+// })->name('products.barcode');

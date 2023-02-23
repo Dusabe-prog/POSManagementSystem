@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Picqer;
 
 class ProductController extends Controller
 {
@@ -37,11 +38,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $product_code = rand(106890122, 100000000);
+        $redColor = '255, 0, 0';
+        $generate = new Picqer\Barcode\BarcodeGeneratorHTML();
+        $barcodes = $generate->getBarCode($product_code, $generate::TYPE_STANDARD_2_5, 2, 60);
+
         $products = new Product;
         $products->product_name = $request->product_name;
         $products->price = $request->price;
         $products->alert_stock = $request->alert_stock;
         $products->quantity = $request->quantity;
+        $products->product_code = $product_code;
+        $products->barcode =  $barcodes;
         $products->brand = $request->brand;
         $products->description = $request->description;
         $products->save();
@@ -81,9 +90,26 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $products)
     {
-        $product->update($request->all());
+        // $product->update($request->all());
+        $product_code = rand(106890122, 100000000);
+
+
+        $redColor = '255, 0, 0';
+        $generate = new Picqer\Barcode\BarcodeGeneratorHTML();
+        $barcodes = $generate->getBarCode($product_code, $generate::TYPE_STANDARD_2_5, 2, 60);
+
+        $products = Product::find($products);
+        $products->product_name = $request->product_name;
+        $products->price = $request->price;
+        $products->alert_stock = $request->alert_stock;
+        $products->quantity = $request->quantity;
+        $products->product_code = $product_code;
+        $products->barcode =  $barcodes;
+        $products->brand = $request->brand;
+        $products->description = $request->description;
+        $products->save();
 
         return redirect()->back()->with('success','Product updated successfully');
     }
@@ -99,5 +125,11 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->back()->with('success','Product deleted successfully');
+    }
+
+    public function GetProductBarcodes()
+    {
+        $productsBarcode = Product::select('barcode', 'product_code')->get();
+        return view('products.barcode.index', compact('productsBarcode'));
     }
 }

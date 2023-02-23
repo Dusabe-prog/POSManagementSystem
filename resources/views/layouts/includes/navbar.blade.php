@@ -7,6 +7,7 @@
 <a href="" class="btn btn-outline rounded-pill"> <i class="fa fa-chart"></i> Suppliers  </a>
 <a href="" class="btn btn-outline rounded-pill"> <i class="fa fa-users"></i> Customers </a>
 <a href="" class="btn btn-outline rounded-pill"> <i class="fa fa-list"></i> Incoming </a>
+<a href="{{ route('products.barcode')}}" class="btn btn-outline rounded-pill"> <i class="fa fa-barcode"></i> Barcode </a>
 
 
 
