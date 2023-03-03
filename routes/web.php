@@ -35,8 +35,3 @@ Route::resource('/users',  'App\Http\Controllers\UserController');
 Route::resource('/companies', 'App\Http\Controllers\CompanyController');
 Route::resource('/transactions', 'App\Http\Controllers\TransactionController');
 Route::get('/barcode', 'App\Http\Controllers\ProductController@GetProductBarcodes')->name('products.barcode');
-// Route::get('barcodes', function(){
-//     return  $products = Product::select('barcode')->get();
-//     return view('products.barcode.index');
-
-// })->name('products.barcode');

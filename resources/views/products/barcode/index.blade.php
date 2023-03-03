@@ -16,8 +16,9 @@
                                     <div class="col-lg-4 col-md-5 col-sm-12 mt-3 text-center">
                                         <div class="card">
                                             <div class="card-body">
-                                                {!! $barcode->barcode !!}
-                                                <h4 class="text-center" style="padding:1em; margin-top: 1em;">{!! $barcode->product_code !!}</h4>
+                                                <img src="{{ asset('product/barcodes/'. $barcode->barcode ) }}" alt="">
+
+                                                <h4 class="text-center" style="padding:1em; margin-top: 0.5em;">{!! $barcode->product_code !!}</h4>
                                             </div>
                                         </div>
                                     </div>
